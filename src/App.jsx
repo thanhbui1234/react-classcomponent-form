@@ -4,147 +4,250 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      countPlus: 0,
-      countCrea: 0,
+      name: "",
+      password: "",
+      remember: false,
+      status: false,
+      radio: false,
+      option: "",
+      isName: true,
+      isPasword: true,
+      values: {},
     };
-    this.inputRef = React.createRef();
+    this.myRef = React.createRef();
   }
-  componentDidMount() {
-    this.inputRef.current.focus();
+
+  componentDidUpdate() {
+    console.info(this.state.values);
+    if (this.state.status == false) {
+      this.state.radio = !this.state.radio;
+    }
   }
-  componentDidUpdate(prevProps, prevState) {
-    console.log(prevState);
-    console.log(this.state.countPlus);
-  }
-  handleInputValue = (e) => {
-    this.setState({ countPlus: e.target.value });
+
+  onHandleValidation = () => {
+    if (this.state.name.length < 5) {
+      this.setState({ isName: false });
+    }
+    if (this.state.password.length < 5) {
+      this.setState({ isPasword: false });
+    }
+    this.setState({
+      values: Object.fromEntries(Object.entries(this.state).slice(0, 6)),
+    });
   };
+  handleClickOutside = (event) => {
+    if (this.myRef && !this.myRef?.current?.contains(event.target)) {
+      this.setState({ isOppen: false });
+    }
+  };
+
+  componentDidMount() {
+    document.addEventListener("click", this.handleClickOutside);
+  }
+
   render() {
+    const handleInput = (tag, e) => {
+      const inputValueKey = `${tag}`;
+      if (tag == "name") {
+        this.setState({ isName: true });
+      }
+      if (tag == "password") {
+        this.setState({ isPasword: true });
+      }
+      this.setState({ [inputValueKey]: e.target.value });
+    };
+    const handleChecked = (tag, e) => {
+      const inputValueKey = `${tag}`;
+      this.setState({ [inputValueKey]: e.target.checked });
+    };
+    const handleOnpenSelect = () => {
+      this.setState((prevState) => ({
+        isOppen: !prevState.isOppen,
+      }));
+    };
+    const handleSelect = (value) => {
+      this.setState({ option: value });
+    };
+
     return (
       <div className="container">
         <form method="get" action="#" id="form">
           <div className="control">
-            <label htmlFor="">Username</label>
+            <label htmlFor="name">Username</label>
             <input
-              ref={this.inputRef}
-              onChange={this.handleInputValue}
+              className={!this.state.isName ? "invalid" : ""}
+              onChange={(e) => handleInput("name", e)}
               id="name"
               placeholder="Enter username"
               type="text"
             />
-            <span className="" id="errName" htmlFor=""></span>
-            <span className="icon-err">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <g clipPath="url(#clip0_279_26)">
-                  <path
-                    d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"
-                    fill="#EB5757"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="clip0_279_26">
-                    <rect width="24" height="24" fill="white" />
-                  </clipPath>
-                </defs>
-              </svg>
-            </span>
+            {!this.state.isName ? (
+              <>
+                <span className="" id="errName" htmlFor="">
+                  User phai tren 5 ky tu
+                </span>
+                <span className="icon-err">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <g clipPath="url(#clip0_279_26)">
+                      <path
+                        d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"
+                        fill="#EB5757"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_279_26">
+                        <rect width="24" height="24" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </span>
+              </>
+            ) : (
+              ""
+            )}
           </div>
           <div className="control">
             <label htmlFor="">Password</label>
-            <input id="password" placeholder="Enter password" type="password" />
-            <span className="" id="errPassword" htmlFor=""></span>
-            <span className="icon-err-password">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <g clipPath="url(#clip0_279_26)">
-                  <path
-                    d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"
-                    fill="#EB5757"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="clip0_279_26">
-                    <rect width="24" height="24" fill="white" />
-                  </clipPath>
-                </defs>
-              </svg>
-            </span>
+            <input
+              id="password"
+              className={!this.state.isPasword ? "invalid" : ""}
+              placeholder="Enter password"
+              type="password"
+              onChange={(e) => handleInput("password", e)}
+            />
+            {!this.state.isPasword ? (
+              <>
+                <span className="" id="errName" htmlFor="">
+                  Password phai tren 5 ky tu
+                </span>
+                <span className="icon-err">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <g clipPath="url(#clip0_279_26)">
+                      <path
+                        d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"
+                        fill="#EB5757"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_279_26">
+                        <rect width="24" height="24" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </span>
+              </>
+            ) : (
+              ""
+            )}
           </div>
           <div>
-            <input id="remember" type="checkbox" />
+            <input
+              onChange={(e) => handleChecked("remember", e)}
+              id="remember"
+              type="checkbox"
+            />
             <label htmlFor="remember">Remember me</label>
           </div>
 
           <label className="switch">
-            <input id="status" type="checkbox" />
+            <input
+              onChange={(e) => handleChecked("status", e)}
+              id="status"
+              type="checkbox"
+            />
             <span className="slider round"></span>
-            <p className="statusText"></p>
+            <p className="statusText">{this.state.status ? "ON" : "OFF"}</p>
           </label>
-          <div className="container-radio">
-            <div>
-              <input type="radio" id="html" name="radioName" value="radio1" />
-              <label htmlFor="html">Radio section 1</label>
+          {this.state?.status && (
+            <div className="container-radio">
+              <div>
+                <input
+                  onChange={(e) => handleInput("radio", e)}
+                  type="radio"
+                  id="html"
+                  name="radioName"
+                  value="radio1"
+                />
+                <label htmlFor="html">Radio section 1</label>
+              </div>
+              <div>
+                <input
+                  onChange={(e) => handleInput("radio", e)}
+                  type="radio"
+                  id="css"
+                  name="radioName"
+                  value="radio2"
+                />
+                <label htmlFor="css">Radio section 2</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="javascript"
+                  name="radioName"
+                  value="radio3"
+                  onChange={(e) => handleInput("radio", e)}
+                />
+                <label htmlFor="javascript">Radio section 3</label>
+              </div>
             </div>
-            <div>
-              <input type="radio" id="css" name="radioName" value="radio2" />
-              <label htmlFor="css">Radio section 2</label>
-            </div>
-            <div>
-              <input
-                type="radio"
-                id="javascript"
-                name="radioName"
-                value="radio3"
-              />
-              <label htmlFor="javascript">Radio section 3</label>
-            </div>
-          </div>
+          )}
 
-          <div className="dropdown">
+          <div
+            ref={this.myRef}
+            onClick={handleOnpenSelect}
+            className="dropdown"
+          >
             <span className="dropbtn">
-              <span className="selected-value">Open this select menu</span>
+              <span className="selected-value">
+                {this?.state?.option ? this.state.option : "Chon di"}
+              </span>
             </span>
-            <div className="dropdown-content">
-              <ul
-                className="select-dropdown"
-                role="listbox"
-                id="select-dropdown"
-              >
-                <li role="option">
-                  <input
-                    type="radio"
-                    id="github"
-                    value="option 1"
-                    name="dropdownOption"
-                  />
-                  <label htmlFor="github">
-                    <i className="bx bxl-github"></i>Option 1
-                  </label>
-                </li>
-                <li role="option">
-                  <input
-                    type="radio"
-                    id="instagram"
-                    value="option 2"
-                    name="dropdownOption"
-                  />
-                  <label htmlFor="instagram">
-                    <i className="bx bxl-instagram"></i>Option 2
-                  </label>
-                </li>
-              </ul>
-            </div>
+            {this.state.isOppen && (
+              <div className="dropdown-content">
+                <ul
+                  className="select-dropdown"
+                  role="listbox"
+                  id="select-dropdown"
+                >
+                  <li onClick={() => handleSelect("option1")} role="option">
+                    <input
+                      type="radio"
+                      id="github"
+                      value="option1"
+                      name="dropdownOption"
+                    />
+                    <label htmlFor="github">
+                      <i className="bx bxl-github"></i>Option 1
+                    </label>
+                  </li>
+                  <li onClick={() => handleSelect("option2")} role="option">
+                    <input
+                      type="radio"
+                      id="instagram"
+                      value="option2"
+                      name="dropdownOption"
+                    />
+                    <label htmlFor="instagram">
+                      <i className="bx bxl-instagram"></i>Option 2
+                    </label>
+                  </li>
+                </ul>
+              </div>
+            )}
+
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -182,7 +285,9 @@ class App extends React.Component {
             <button id="cancel" type="button">
               Cancel
             </button>
-            <button type="submit">Next</button>
+            <button onClick={this.onHandleValidation} type="button">
+              Next
+            </button>
           </div>
         </form>
       </div>

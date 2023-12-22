@@ -8,21 +8,16 @@
   :focus {
     outline: none;
   }
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-  }
+
   body {
     background-color: #f0d9ff;
 
     #form {
-      margin: 10px auto;
+      background-color: #fff;
+      margin: 0px auto;
       width: 564px;
       height: 1040px;
       display: flex;
-      align-items: start;
       flex-direction: column;
       gap: 40px;
       padding: 60px 98px;
@@ -34,6 +29,7 @@
       *input {
         border: 1px solid #f1efef;
       }
+
       input[type="text"],
       input[type="password"] {
         margin-top: 10px;
@@ -91,7 +87,7 @@
       .container-radio {
         flex-direction: column;
         gap: 20px;
-        display: none;
+        // display: none;
       }
       .active-radio {
         display: flex;
@@ -143,7 +139,7 @@
             height: 17px;
             width: 18px;
             left: 4px;
-            bottom: 3px;
+            bottom: 4px;
             background-color: white;
             -webkit-transition: 0.4s;
             transition: 0.4s;
@@ -198,7 +194,7 @@
         position: absolute;
         top: 50%;
         left: 95%;
-        display: none;
+        // display: none;
       }
       .invalidIcon {
         display: block;
@@ -223,8 +219,8 @@
           font-style: normal;
           font-weight: 400;
           line-height: 24px;
-          :active,
-          :hover {
+          &:active,
+          &:hover {
             background-color: #7a5cfa;
             color: #fff;
           }
@@ -245,47 +241,61 @@
         width: 100%;
         border-radius: 8px;
         border: 1px solid #ccc;
-      }
-      .dropdown:hover {
-        border-color: #7a5cfa;
-      }
-      .dropdown .dropbtn {
-        color: #333;
-        font-family: Noto Sans;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 24px; /* 150% */
-        padding: 16px;
+        &:hover {
+          border-color: #7a5cfa;
+        }
+        .dropbtn {
+          color: #333;
+          font-family: Noto Sans;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 24px; /* 150% */
+          padding: 16px;
+        }
+        .dropdown-content {
+          transition: all 0.2s;
+          background-color: #f9f9f9;
+          width: 100%;
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          z-index: 1;
+          p {
+            color: black;
+            border: 1px solid #ccc;
+            padding-left: 12px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            height: 56px;
+            font-family: Noto Sans;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 50px; /* 150% */
+          }
+        }
+        .icon-select {
+          transition: all 0.5s;
+          position: absolute;
+          top: 50%;
+          transform: translate(0, -50%);
+          right: 16px;
+        }
+        &:hover .icon-select {
+          top: 30%;
+          transform: rotate(180deg);
+        }
+        &:visited .icon-select {
+          top: 30%;
+          transform: rotate(180deg);
+        }
       }
 
-      .dropdown-content {
-        transition: all 0.2s;
-        display: none;
-        background-color: #f9f9f9;
-        width: 100%;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        z-index: 1;
-      }
       .active-drop-content {
         display: none;
       }
 
-      .dropdown-content p {
-        color: black;
-        border: 1px solid #ccc;
-        padding-left: 12px;
-        text-decoration: none;
-        display: block;
-        text-align: left;
-        height: 56px;
-        font-family: Noto Sans;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 50px; /* 150% */
-      }
-      .dropdown-content p:hover {
+      .dropdown-content .dropdown-content p:hover {
         color: white;
         background-color: #7a5cfa;
       }
@@ -295,17 +305,7 @@
       .active-show {
         display: none;
       }
-      .icon-select {
-        transition: all 0.5s;
-        position: absolute;
-        top: 50%;
-        transform: translate(0, -50%);
-        right: 16px;
-      }
-      .icon-select-active {
-        top: 16px;
-        transform: rotate(180deg);
-      }
+
       .optionSelect {
         color: #666;
         font-family: Noto Sans;
@@ -321,6 +321,7 @@
         background-color: #7a5cfa;
         color: #fff;
       }
+
       .dropdown-content label {
         padding-left: 16px;
         font-family: Noto Sans;
@@ -380,10 +381,6 @@
         position: absolute;
         left: 0;
         opacity: 0;
-      }
-
-      .custom-select.active .arrow {
-        transform: rotate(180deg);
       }
 
       .custom-select.active .select-dropdown {
