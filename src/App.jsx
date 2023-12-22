@@ -14,16 +14,14 @@ class App extends React.Component {
       isPasword: true,
       values: {},
     };
-    this.selectRef = React.createRef();
+    this.myRef = React.createRef();
   }
 
   componentDidUpdate() {
+    console.info(this.state.values);
     if (this.state.status == false) {
       this.state.radio = !this.state.radio;
     }
-  }
-  componentWillUnmount() {
-    document.removeEventListener("click", this.handleClickOutside);
   }
 
   onHandleValidation = () => {
@@ -37,20 +35,17 @@ class App extends React.Component {
       values: Object.fromEntries(Object.entries(this.state).slice(0, 6)),
     });
   };
+  handleClickOutside = (event) => {
+    if (this.myRef && !this.myRef?.current?.contains(event.target)) {
+      this.setState({ isOppen: false });
+    }
+  };
+
+  componentDidMount() {
+    document.addEventListener("click", this.handleClickOutside);
+  }
 
   render() {
-    const onCancel = () => {
-      this.setState({
-        name: "",
-        password: "",
-        remember: false,
-        status: false,
-        radio: false,
-        option: "",
-        isName: true,
-        isPasword: true,
-      });
-    };
     const handleInput = (tag, e) => {
       const inputValueKey = `${tag}`;
       if (tag == "name") {
@@ -173,7 +168,7 @@ class App extends React.Component {
               type="checkbox"
             />
             <span className="slider round"></span>
-            <p className="statusText"></p>
+            <p className="statusText">{this.state.status ? "ON" : "OFF"}</p>
           </label>
           {this.state?.status && (
             <div className="container-radio">
@@ -210,7 +205,11 @@ class App extends React.Component {
             </div>
           )}
 
-          <div onClick={handleOnpenSelect} className="dropdown">
+          <div
+            ref={this.myRef}
+            onClick={handleOnpenSelect}
+            className="dropdown"
+          >
             <span className="dropbtn">
               <span className="selected-value">
                 {this?.state?.option ? this.state.option : "Chon di"}
@@ -283,7 +282,7 @@ class App extends React.Component {
             </button>
           </div>
           <div className="BTN">
-            <button onClick={onCancel} id="cancel" type="button">
+            <button id="cancel" type="button">
               Cancel
             </button>
             <button onClick={this.onHandleValidation} type="button">
