@@ -18,7 +18,6 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    console.info(this.state.values);
     if (this.state.status == false) {
       this.state.radio = !this.state.radio;
     }
@@ -254,7 +253,9 @@ class App extends React.Component {
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              className="icon-select"
+              className={
+                !this.state.isOppen ? "icon-select" : "icon-select-active"
+              }
             >
               <g clipPath="url(#clip0_291_39)">
                 <path
