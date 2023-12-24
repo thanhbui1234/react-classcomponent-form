@@ -281,11 +281,12 @@
           transform: translate(0, -50%);
           right: 16px;
         }
-        &:hover .icon-select {
-          top: 30%;
-          transform: rotate(180deg);
-        }
-        &:visited .icon-select {
+        .icon-select-active {
+          transition: all 0.5s;
+          position: absolute;
+          top: 50%;
+          transform: translate(0, -50%);
+          right: 16px;
           top: 30%;
           transform: rotate(180deg);
         }
