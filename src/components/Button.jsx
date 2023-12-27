@@ -5,7 +5,10 @@ class Button extends React.Component {
     this.state = {};
   }
 
-  handleClick = (e) => {
+  handleClick = () => {
+    if (this.props.onResest) {
+      this.props?.onResest();
+    }
     if (this.props.onSubmit) {
       this?.props?.onSubmit();
     }

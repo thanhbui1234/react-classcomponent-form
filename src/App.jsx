@@ -21,7 +21,7 @@ class App extends React.Component {
       isName: true,
       isPasword: true,
       isNumber: true,
-      values: {},
+
       options: ["option 1", "option 2"],
     };
     this.myRef = React.createRef();
@@ -39,11 +39,27 @@ class App extends React.Component {
       });
     }
     if (this.state.number < 1) {
-      console.log("dung vay");
       this.setState({
         isNumber: false,
       });
     }
+
+    console.log(this.state);
+  };
+
+  onResestState = () => {
+    this.setState({
+      username: "",
+      password: "",
+      number: 0,
+      remember: false,
+      status: false,
+      radio: false,
+      option: "",
+      isName: true,
+      isPasword: true,
+      isNumber: true,
+    });
   };
 
   render() {
@@ -63,7 +79,6 @@ class App extends React.Component {
     };
 
     const handleChecked = (tag, check) => {
-      console.log(check);
       const inputValueKey = `${tag}`;
       this.setState({ [inputValueKey]: check });
     };
@@ -74,7 +89,12 @@ class App extends React.Component {
 
     return (
       <div className="container">
-        <form method="get" action="#" id="form">
+        <form
+          onSubmit={this.onHandleValidation}
+          method="get"
+          action=""
+          id="form"
+        >
           <Input
             isValid={this.state.isName}
             inputChange={handleInputChange}
@@ -168,8 +188,10 @@ class App extends React.Component {
           />
 
           <div className="BTN">
-            <Button type={"button"}>Cancel</Button>
-            <Button onSubmit={this.onHandleValidation} type="submit">
+            <Button onResest={this.onResestState} type={"button"}>
+              Cancel
+            </Button>
+            <Button onSubmit={this.onHandleValidation} type="button">
               Next
             </Button>
           </div>
