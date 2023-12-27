@@ -18,7 +18,10 @@ class Select extends React.Component {
     }));
   };
   handleClickOutside = (event) => {
-    if (this.myRef && !this.myRef?.current?.contains(event.target)) {
+    if (
+      this.myRefSelect &&
+      !this.myRefSelect?.current?.contains(event.target)
+    ) {
       this.setState({ isOpen: false });
     }
   };
@@ -57,7 +60,6 @@ class Select extends React.Component {
                       >
                         <input
                           type="radio"
-                          id="github"
                           value={option}
                           name="dropdownOption"
                         />

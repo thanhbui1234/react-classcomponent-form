@@ -24,7 +24,6 @@ class App extends React.Component {
 
       options: ["option 1", "option 2"],
     };
-    this.myRef = React.createRef();
   }
 
   onHandleValidation = (e) => {
