@@ -31,7 +31,8 @@
       }
 
       input[type="text"],
-      input[type="password"] {
+      input[type="password"],
+      input[type="number"] {
         margin-top: 10px;
         border: 2px solid #f1efef;
         padding: 10px;
@@ -41,7 +42,8 @@
         color: gray;
       }
       input[type="text"] ~ label,
-      input[type="password"] ~ label {
+      input[type="password"] ~ label,
+      input[type="number"] ~ label {
         color: #666;
         font-family: Noto Sans;
         font-size: 12px;
@@ -51,7 +53,9 @@
       }
       input[type="text"]:hover,
       input[type="password"]:hover,
+      input[type="number"]:hover,
       input[type="text"]:focus,
+      input[type="number"]:focus,
       input[type="password"]:focus {
         border-color: #7a5cfa;
         outline: none;
@@ -92,13 +96,13 @@
       .active-radio {
         display: flex;
       }
-      input[name="radioName"] {
+      input[name="radio"] {
         cursor: pointer;
         width: 24px;
         height: 24px;
         accent-color: #7a5cfa;
       }
-      input[name="radioName"] ~ label {
+      input[name="radio"] ~ label {
         font-size: 20px;
         margin-left: 10px;
         position: relative;
@@ -180,8 +184,7 @@
         font-weight: 400;
         line-height: 24px; /* 150% */
       }
-      #errName,
-      #errPassword {
+      #errSpan {
         position: absolute;
         bottom: -26px;
         padding-top: 30px;
@@ -339,6 +342,8 @@
       }
 
       .select-dropdown li {
+        border: 1px solid #ccc;
+
         position: relative;
         cursor: pointer;
         display: flex;
