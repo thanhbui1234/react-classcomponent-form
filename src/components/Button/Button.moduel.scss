@@ -1,0 +1,22 @@
+button {
+  outline: none;
+  cursor: pointer;
+  background: #fff;
+  color: #7a5cfa;
+  padding: 15px 43px;
+  width: 172px;
+  height: 56px;
+  border-radius: 8px;
+  border: 1px solid #7a5cfa;
+  text-align: center;
+  font-family: Noto Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  &:active,
+  &:hover {
+    background-color: #7a5cfa;
+    color: #fff;
+  }
+}

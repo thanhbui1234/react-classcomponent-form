@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-family: sans-serif;
+  user-select: none;
+  :focus {
+    outline: none;
+  }
+
+  body {
+    background-color: #f0d9ff;
+
+    #form {
+      background-color: #fff;
+      margin: 0px auto;
+      width: 564px;
+      height: 1040px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      padding: 60px 98px;
+      .control {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+
+      .BTN {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}
