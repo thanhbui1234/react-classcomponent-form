@@ -1,0 +1,78 @@
+.control {
+  *input {
+    border: 1px solid #f1efef;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="number"] {
+    margin-top: 10px;
+    border: 2px solid #f1efef;
+    padding: 10px;
+    border-radius: 10px;
+    width: 564px;
+    height: 32px;
+    color: gray;
+  }
+  input[type="text"] ~ label,
+  input[type="password"] ~ label,
+  input[type="number"] ~ label {
+    color: #666;
+    font-family: Noto Sans;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px; /* 150% */
+  }
+  input[type="text"]:hover,
+  input[type="password"]:hover,
+  input[type="number"]:hover,
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  input[type="password"]:focus {
+    border-color: #7a5cfa;
+    outline: none;
+  }
+  .invalid {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25),
+      0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-color: red !important;
+    color: red;
+  }
+
+  input[type="checkbox"] {
+    cursor: pointer;
+    padding: 30px;
+    accent-color: #7a5cfa;
+    outline: none;
+    width: 24px;
+    height: 24px;
+  }
+  input[type="checkbox"] ~ label {
+    color: gray;
+    font-size: 20px;
+    position: relative;
+    margin-left: 10px;
+    top: -5px;
+    color: #666;
+    font-family: Noto Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+  }
+  #errSpan {
+    position: absolute;
+    bottom: -26px;
+    padding-top: 30px;
+    color: red;
+    font-size: 14px;
+  }
+
+  .icon-err {
+    position: absolute;
+    top: 50%;
+    left: 95%;
+    // display: none;
+  }
+}

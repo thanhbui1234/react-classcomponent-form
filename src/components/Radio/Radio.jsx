@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import "./Radio.scss";
 class Radio extends React.Component {
   constructor(props) {
     super(props);

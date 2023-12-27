@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Button.moduel.scss";
 class Button extends React.Component {
   constructor(props) {
     super(props);

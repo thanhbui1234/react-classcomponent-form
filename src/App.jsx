@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import "./test.scss";
-import Button from "./components/Button";
-import Input from "./components/Input";
-import Checkbox from "./components/Checkbox";
-import Switch from "./components/Switch";
-import Radio from "./components/Radio";
-import Select from "./components/Select";
+import "./main.scss";
+import Button from "./components/Button/Button";
+import Input from "./components/Input/Input";
+import Checkbox from "./components/Checkbox/Checkbox";
+import Switch from "./components/Switch/Switch";
+import Radio from "./components/Radio/Radio";
+import Select from "./components/Select/Select";
 class App extends React.Component {
   constructor() {
     super();
@@ -125,7 +125,7 @@ class App extends React.Component {
             minLenght={5}
           />
 
-          <div>
+          <div className="check-remember">
             <Checkbox
               onCheckbox={handleChecked}
               id="remember"
