@@ -1,4 +1,7 @@
+@import "/src/variables.module.scss";
+
 .control {
+  position: relative;
   *input {
     border: 1px solid #f1efef;
   }
@@ -30,7 +33,35 @@
   input[type="text"]:focus,
   input[type="number"]:focus,
   input[type="password"]:focus {
-    border-color: #7a5cfa;
+    &.primary {
+      border-color: #0d6efd;
+    }
+    &.secondary {
+      border-color: #6c757d;
+    }
+    &.success {
+      border-color: #198754;
+    }
+    &.warning {
+      border-color: #ffc107;
+    }
+    &.danger {
+      border-color: #dc3545;
+    }
+    &.info {
+      border-color: #0dcaf0;
+    }
+    &.light {
+      border-color: #f8f9fa;
+    }
+    &.dark {
+      border-color: #212529;
+    }
+    &.default {
+      border-color: $colorPuple;
+    }
+
+    // 11111
     outline: none;
   }
   .invalid {
@@ -38,30 +69,10 @@
       0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     border-color: red !important;
     color: red;
+    ///2222
   }
 
-  input[type="checkbox"] {
-    cursor: pointer;
-    padding: 30px;
-    accent-color: #7a5cfa;
-    outline: none;
-    width: 24px;
-    height: 24px;
-  }
-  input[type="checkbox"] ~ label {
-    color: gray;
-    font-size: 20px;
-    position: relative;
-    margin-left: 10px;
-    top: -5px;
-    color: #666;
-    font-family: Noto Sans;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 24px;
-  }
-  #errSpan {
+  .errSpan {
     position: absolute;
     bottom: -26px;
     padding-top: 30px;
@@ -69,7 +80,7 @@
     font-size: 14px;
   }
 
-  .icon-err {
+  .icon_err {
     position: absolute;
     top: 50%;
     left: 95%;

@@ -1,26 +1,37 @@
 import React, { Component } from "react";
-import "./Radio.scss";
+import style from "./Radio.module.scss";
 class Radio extends React.Component {
   constructor(props) {
     super(props);
     this.myRef = React.createRef();
   }
 
-  handleRadio = () => {
-    this.props.onRadio(this.props.name, this.props.value);
+  static defaultProps = {
+    type: "radio",
+    variant: "default",
+  };
+  handleRadio = (e) => {
+    this.props.onRadio(e.target.name, e.target.value);
   };
   render() {
-    const { type, id, name, value, label } = this.props;
+    const { type, name, radios, variant } = this.props;
     return (
       <>
-        <input
-          onChange={this.handleRadio}
-          type={type}
-          id={id}
-          name={name}
-          value={value}
-        />
-        <label htmlFor={id}>{label}</label>
+        {radios.map((radio, i) => {
+          return (
+            <div key={i + 1} className={style.container_radio}>
+              <input
+                className={style[variant]}
+                onChange={this.handleRadio}
+                type={type}
+                id={radio}
+                name={name}
+                value={radio}
+              />
+              <label htmlFor={radio}>{radio}</label>
+            </div>
+          );
+        })}
       </>
     );
   }

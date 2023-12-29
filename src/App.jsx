@@ -14,15 +14,27 @@ class App extends React.Component {
       isValid: false,
       password: "",
       number: 0,
-      remember: false,
+      remember: [],
+      isRemember: true,
       status: false,
       radio: false,
       option: "",
       isName: true,
       isPasword: true,
       isNumber: true,
-
-      options: ["option 1", "option 2"],
+      isSelected: true,
+      isRadioSw: true,
+      checkBoxs: ["Remember 1", "Remember 2", "Remember 3 "],
+      options: [
+        "option 1",
+        "option 2",
+        "option 3",
+        "option 4",
+        "option 5",
+        "option 6",
+        "option 7",
+      ],
+      radios: ["Radio1", "Radio2", "Radio3", "Radio4"],
     };
   }
 
@@ -43,6 +55,23 @@ class App extends React.Component {
       });
     }
 
+    if (!this.state.option) {
+      this.setState({
+        isSelected: false,
+      });
+    }
+    if (!this.state.radio) {
+      this.setState({
+        isRadioSw: false,
+      });
+    }
+
+    if (this.state.remember.length === 0) {
+      this.setState({
+        isRemember: false,
+      });
+    }
+
     console.log(this.state);
   };
 
@@ -58,6 +87,7 @@ class App extends React.Component {
       isName: true,
       isPasword: true,
       isNumber: true,
+      isSelected: true,
     });
   };
 
@@ -79,11 +109,25 @@ class App extends React.Component {
 
     const handleChecked = (tag, check) => {
       const inputValueKey = `${tag}`;
+      console.log(inputValueKey);
       this.setState({ [inputValueKey]: check });
+    };
+
+    const handleCheckbox = (tag, check) => {
+      this.setState({ isRemember: true });
+      const newArr = [...this.state.remember, tag];
+      this.setState({ remember: newArr });
+    };
+
+    const handleCheckedRadio = (tag, check) => {
+      const inputValueKey = `${tag}`;
+      this.setState({ [inputValueKey]: check });
+      this.setState({ isRadioSw: true });
     };
 
     const handleSelect = (value) => {
       this.setState({ option: value });
+      this.setState({ isSelected: true });
     };
 
     return (
@@ -97,17 +141,15 @@ class App extends React.Component {
           <Input
             isValid={this.state.isName}
             inputChange={handleInputChange}
-            styleErr="invalid"
             name="username"
             label="Username"
-            type="text"
             placeholder="Enter your username"
             minLenght={5}
+            variant="dark"
           />
           <Input
             isValid={this.state.isPasword}
             inputChange={handleInputChange}
-            styleErr="invalid"
             name="password"
             label="Password"
             type="password"
@@ -117,80 +159,51 @@ class App extends React.Component {
           <Input
             isValid={this.state.isNumber}
             inputChange={handleInputChange}
-            styleErr="invalid"
             name="number"
             label="Number"
             type="number"
             placeholder="Enter your number"
             minLenght={5}
+            variant="danger"
           />
 
-          <div className="check-remember">
-            <Checkbox
-              onCheckbox={handleChecked}
-              id="remember"
-              type="checkbox"
-              label="Remember me"
-              name="remember"
-            />
-          </div>
+          <Checkbox
+            onCheckbox={handleCheckbox}
+            checkboxs={this.state.checkBoxs}
+            isRemember={this.state.isRemember}
+            variant="default"
+          />
 
           <Switch
             isSwitch={this.state.status}
             onSwitch={handleChecked}
-            classStatusText="statusText"
             setTrue="ON"
             setFalse="OFF"
             name="status"
+            isRadioSw={this.state.isRadioSw}
           />
 
           {this.state?.status && (
-            <div className="container-radio">
-              <div>
-                <Radio
-                  onRadio={handleChecked}
-                  type="radio"
-                  id="radio1"
-                  name="radio"
-                  value="radio1"
-                  label="Radio section 1"
-                />
-              </div>
-              <div>
-                <Radio
-                  onRadio={handleChecked}
-                  type="radio"
-                  id="radio2"
-                  name="radio"
-                  value="radio2"
-                  label="Radio section 2"
-                />
-              </div>
-              <div>
-                <Radio
-                  onRadio={handleChecked}
-                  type="radio"
-                  id="radio3"
-                  name="radio"
-                  value="radio3"
-                  label="Radio section 3"
-                />
-              </div>
+            <div>
+              <Radio
+                onRadio={handleCheckedRadio}
+                name="radio"
+                radios={this.state.radios}
+              />
             </div>
           )}
 
           <Select
             option={this.state.option}
-            textLabel="chondi"
+            textLabel="chon bừa đi"
             options={this.state.options}
             handleOption={handleSelect}
+            isOption={this.state.isSelected}
           />
 
           <div className="BTN">
-            <Button onResest={this.onResestState} type={"button"}>
-              Cancel
-            </Button>
-            <Button onSubmit={this.onHandleValidation} type="button">
+            <Button clickBtn={this.onResestState}>Cancel</Button>
+            <Button type="submit" clickBtn={this.onHandleValidation}>
               Next
             </Button>
           </div>
