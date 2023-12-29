@@ -1,6 +1,7 @@
 @import "/src/variables.module.scss";
 
 .control {
+  position: relative;
   *input {
     border: 1px solid #f1efef;
   }
@@ -32,7 +33,34 @@
   input[type="text"]:focus,
   input[type="number"]:focus,
   input[type="password"]:focus {
-    border-color: $colorPuple;
+    &.primary {
+      border-color: #0d6efd;
+    }
+    &.secondary {
+      border-color: #6c757d;
+    }
+    &.success {
+      border-color: #198754;
+    }
+    &.warning {
+      border-color: #ffc107;
+    }
+    &.danger {
+      border-color: #dc3545;
+    }
+    &.info {
+      border-color: #0dcaf0;
+    }
+    &.light {
+      border-color: #f8f9fa;
+    }
+    &.dark {
+      border-color: #212529;
+    }
+    &.default {
+      border-color: $colorPuple;
+    }
+
     // 11111
     outline: none;
   }
@@ -44,27 +72,6 @@
     ///2222
   }
 
-  // input[type="checkbox"] {
-  //   cursor: pointer;
-  //   padding: 30px;
-  //   accent-color: $colorPuple;
-  //   outline: none;
-  //   width: 24px;
-  //   height: 24px;
-  // }
-  // input[type="checkbox"] ~ label {
-  //   color: gray;
-  //   font-size: 20px;
-  //   position: relative;
-  //   margin-left: 10px;
-  //   top: -5px;
-  //   color: #666;
-  //   font-family: Noto Sans;
-  //   font-size: 16px;
-  //   font-style: normal;
-  //   font-weight: 400;
-  //   line-height: 24px;
-  // }
   .errSpan {
     position: absolute;
     bottom: -26px;

@@ -1,5 +1,5 @@
 import React, { Componet } from "react";
-import "./Input.scss";
+import style from "./Input.module.scss";
 class Input extends React.Component {
   constructor(prop) {
     super(prop);
@@ -18,33 +18,27 @@ class Input extends React.Component {
   };
 
   render() {
-    const {
-      isValid,
-      classErrr,
-      styleErr,
-      name,
-      label,
-      type,
-      placeholder,
-      minLenght,
-    } = this.props;
+    const { isValid, name, label, type, placeholder, minLenght, variant } =
+      this.props;
+
+    const styleBorder = `${style[variant]}`;
     return (
       <>
-        <div className="control">
+        <div className={style.control}>
           <label htmlFor="">{label}</label>
           <input
-            className={isValid ? "" : "invalid"}
+            className={isValid ? styleBorder : style.invalid}
             onChange={this.handleInput}
             type={type}
             placeholder={placeholder}
           />
           {!isValid && (
             <>
-              <span className="errSpan" id="errSpan" htmlFor="">
+              <span className={style.errSpan} id="errSpan" htmlFor="">
                 {`${name} phai tren ${minLenght} `}
                 {name === "number" ? "" : "ky tu "}
               </span>
-              <span className="icon_err">
+              <span className={style.icon_err}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"

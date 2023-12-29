@@ -156,7 +156,7 @@ class App extends React.Component {
             placeholder="Enter your password"
             minLenght={5}
           />
-          {/* <Input
+          <Input
             isValid={this.state.isNumber}
             inputChange={handleInputChange}
             name="number"
@@ -164,15 +164,7 @@ class App extends React.Component {
             type="number"
             placeholder="Enter your number"
             minLenght={5}
-          /> */}
-          <Input
-            isValid={this.state.isNumber}
-            inputChange={handleInputChange}
-            name="number"
-            label="Number"
-            type="number"
-            placeholder="Enter your password"
-            minLenght={5}
+            variant="danger"
           />
 
           <Checkbox
