@@ -34,7 +34,7 @@ class Input extends React.Component {
           />
           {!isValid && (
             <>
-              <span className={style.errSpan} id="errSpan" htmlFor="">
+              <span className={style.errSpan} htmlFor="">
                 {`${name} phai tren ${minLenght} `}
                 {name === "number" ? "" : "ky tu "}
               </span>

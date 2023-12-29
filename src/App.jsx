@@ -113,7 +113,7 @@ class App extends React.Component {
       this.setState({ [inputValueKey]: check });
     };
 
-    const handleCheckbox = (tag, check) => {
+    const handleCheckbox = (tag) => {
       this.setState({ isRemember: true });
       const newArr = [...this.state.remember, tag];
       this.setState({ remember: newArr });
