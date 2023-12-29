@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import "./Select.scss";
+import style from "./Select.module.scss";
+import clsx from "clsx";
+import { IoIosArrowDown } from "react-icons/io";
+
 class Select extends React.Component {
   constructor(props) {
     super(props);
@@ -8,6 +11,10 @@ class Select extends React.Component {
     };
     this.myRefSelect = React.createRef();
   }
+  static defaultProps = {
+    variant: "default",
+  };
+
   handleClickOption = (value) => {
     this?.props?.handleOption(value);
   };
@@ -31,23 +38,33 @@ class Select extends React.Component {
   }
 
   render() {
-    const { option, textLabel, options } = this.props;
+    const { type, option, textLabel, options, variant, isOption } = this.props;
+    const styleSelect = `${style[variant]}`;
+
     return (
       <>
         <div
           ref={this.myRefSelect}
           onClick={this.handleOnpenSelect}
-          className="dropdown"
+          className={
+            isOption
+              ? clsx(style.dropdown, styleSelect)
+              : clsx(style.dropdown, styleSelect, style.invalid)
+          }
         >
-          <span className="dropbtn">
+          <span className={style.dropbtn}>
             <span className="selected-value">
               {option ? option : textLabel}
             </span>
           </span>
           {this.state.isOpen && (
-            <div className="dropdown-content">
+            <div className={style.dropdown_content}>
               <ul
-                className="select-dropdown"
+                className={clsx(
+                  style.select_dropdown,
+                  styleSelect,
+                  style.invalid
+                )}
                 role="listbox"
                 id="select-dropdown"
               >
@@ -55,6 +72,7 @@ class Select extends React.Component {
                   return (
                     <React.Fragment key={i + 1}>
                       <li
+                        className={styleSelect}
                         onClick={() => this.handleClickOption(option)}
                         role="option"
                       >
@@ -63,7 +81,7 @@ class Select extends React.Component {
                           value={option}
                           name="dropdownOption"
                         />
-                        <label htmlFor="github">
+                        <label className={styleSelect} htmlFor="github">
                           <i className="bx bxl-github"></i>
                           {option}
                         </label>
@@ -74,28 +92,17 @@ class Select extends React.Component {
               </ul>
             </div>
           )}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
+          <IoIosArrowDown
             className={
-              !this.state.isOpen ? "icon-select" : "icon-select-active"
+              isOption
+                ? !this.state.isOpen
+                  ? style.icon_select
+                  : style.icon_select_active
+                : !this.state.isOpen
+                ? clsx(style.icon_select, style.invalid)
+                : clsx(style.icon_select_active, style.invalid)
             }
-          >
-            <g clipPath="url(#clip0_291_39)">
-              <path
-                d="M7.41 15.41L12 10.83L16.59 15.41L18 14L12 8L6 14L7.41 15.41Z"
-                fill="#7A5CFA"
-              />
-            </g>
-            <defs>
-              <clipPath id="clip0_291_39">
-                <rect width="24" height="24" fill="white" />
-              </clipPath>
-            </defs>
-          </svg>
+          />
         </div>
       </>
     );

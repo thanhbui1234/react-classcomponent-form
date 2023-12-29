@@ -7,6 +7,12 @@ class Input extends React.Component {
       value: "",
     };
   }
+
+  static defaultProps = {
+    type: "text",
+    variant: "default",
+    errColor: "default",
+  };
   handleInput = (e) => {
     this.props.inputChange(e.target.value, this.props.name);
   };
@@ -27,18 +33,18 @@ class Input extends React.Component {
         <div className="control">
           <label htmlFor="">{label}</label>
           <input
-            className={isValid ? "" : styleErr}
+            className={isValid ? "" : "invalid"}
             onChange={this.handleInput}
             type={type}
             placeholder={placeholder}
           />
           {!isValid && (
             <>
-              <span className={classErrr} id="errSpan" htmlFor="">
+              <span className="errSpan" id="errSpan" htmlFor="">
                 {`${name} phai tren ${minLenght} `}
                 {name === "number" ? "" : "ky tu "}
               </span>
-              <span className="icon-err">
+              <span className="icon_err">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
